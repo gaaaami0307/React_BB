@@ -4,6 +4,7 @@ function Outline() {
     <div className="min-h-screen flex flex-col">
       {/* ヘッダー */}
       <header className="bg-[#edfffd] h-24 min-w-screen relative overflow-hidden">
+      <div className="absolute bg-[#eaeaea] top-23 h-1 w-full z-200"></div>
       {/* 斜めの装飾 */}
       <div className="absolute right-0 top-0 w-1/2 h-full bg-[#7fffd4] 
           transform skew-x-[-20deg] translate-x-20 z-100"></div>
