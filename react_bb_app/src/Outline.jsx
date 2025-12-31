@@ -6,7 +6,10 @@ function Outline() {
       <header className="bg-[#edfffd] h-24 min-w-screen relative overflow-hidden">
       {/* 斜めの装飾 */}
       <div className="absolute right-0 top-0 w-1/2 h-full bg-[#7fffd4] 
-          transform skew-x-[-20deg] translate-x-20"></div>
+          transform skew-x-[-20deg] translate-x-20 z-10"></div>
+      <div className="absolute right-0 top-0 w-1/2 h-full bg-[#5fdfb4] 
+        transform skew-x-[-20deg] translate-x-17 z-0"></div>
+
     </header>
       
       <div className="flex flex-1">
