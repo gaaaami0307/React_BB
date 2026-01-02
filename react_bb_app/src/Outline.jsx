@@ -20,9 +20,18 @@ function Outline() {
           <div className="absolute bg-[#cccccc] left-0 w-24 h-1/2 transform skew-y-[60deg] translate-y-150 z-130"></div>
           <div className="absolute bg-[#dddddd] left-0 w-24 h-1/2 transform skew-y-[40deg] translate-y-130 z-120"></div>
           <div className="absolute bg-[#e5e5e5] left-0 w-24 h-1/2 transform skew-y-[20deg] translate-y-112 z-110"></div>
-
+          
           {/* 影 */}
           <div className="absolute bg-[#cacaca] left-23 w-2 h-full z-200"></div>
+
+          {/* サイドアイコン */}
+          <div className="relative w-24 h-90 flex-col">
+            <div className="w-24 h-24 bg-[#ffffff]">
+              <img src="/images/thread.png" alt="Thread Icon" className="absolute w-24 h-24 p-3"></img>
+            </div>
+
+          </div>
+
         </aside>
       
         {/* メインコンテンツ */}
