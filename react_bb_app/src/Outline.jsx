@@ -50,7 +50,15 @@ function Outline() {
         </aside>
       
         {/* メインコンテンツ */}
-        <main className="flex-1 bg-[#f8f8f8] p-4">
+        <main className="flex-1 flex-col bg-[#f8f8f8] p-4">
+          {/* スレッド一覧 */}
+          <ul className="space-y-2 mb-4">
+            {threads.map(thread => (
+              <li key={thread.id} className="bg-white p-3 rounded shadow">
+                {thread.title}
+              </li>
+            ))}
+          </ul>
         </main>
       </div>
     </div>
