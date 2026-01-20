@@ -41,7 +41,7 @@ function Outline() {
 
           {/* サイドアイコン */}
           <div className="relative w-24 h-90 flex-col">
-            <a href="/" className="w-24 h-24 bg-[#ffffff] block cursor-pointer">
+            <a href="/" className="w-24 h-24 bg-[#ffffff] hover:bg-[#e0e0e0] block cursor-pointer transition-colors">
               <img src="/images/thread.png" alt="Thread Icon" className="absolute w-24 h-24 p-3 pl-2"></img>
             </a>
 
