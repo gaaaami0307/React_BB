@@ -1,5 +1,20 @@
+import { useState, useEffect } from 'react';
 
 function Outline() {
+  const [threads, setThreads] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    const offset = currentPage * 10;
+    fetch(`https://railway.bulletinboard.techtrain.dev/threads?offset=${offset}`)
+    .then(response => response.json())
+    .then(data => {
+      setThreads(data)
+      console.log(data);
+    })
+    .catch(error => console.error('Error:', error));
+  }, [currentPage]); // currentPageが変化したらデータ取得
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* ヘッダー */}
@@ -36,7 +51,6 @@ function Outline() {
       
         {/* メインコンテンツ */}
         <main className="flex-1 bg-[#f8f8f8] p-4">
-          テスト
         </main>
       </div>
     </div>
