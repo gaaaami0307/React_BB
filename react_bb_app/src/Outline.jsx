@@ -44,7 +44,9 @@ function Outline() {
             <a href="/" className="w-24 h-24 bg-[#ffffff] hover:bg-[#e0e0e0] block cursor-pointer transition-colors">
               <img src="/images/thread.png" alt="Thread Icon" className="absolute w-24 h-24 p-3 pl-2"></img>
             </a>
-
+            <a href="/threads/new" className="w-24 h-24 bg-[#ffffff] hover:bg-[#e0e0e0] block cursor-pointer transition-colors">
+              <img src="/images/post.png" alt="Post Icon" className="absolute w-24 h-24 p-3 pl-2"></img>
+            </a>
           </div>
 
         </aside>
