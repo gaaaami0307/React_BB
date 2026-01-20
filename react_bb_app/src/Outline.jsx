@@ -41,9 +41,9 @@ function Outline() {
 
           {/* サイドアイコン */}
           <div className="relative w-24 h-90 flex-col">
-            <div className="w-24 h-24 bg-[#ffffff]">
+            <a href="/" className="w-24 h-24 bg-[#ffffff] block cursor-pointer">
               <img src="/images/thread.png" alt="Thread Icon" className="absolute w-24 h-24 p-3 pl-2"></img>
-            </div>
+            </a>
 
           </div>
 
@@ -63,7 +63,15 @@ function Outline() {
           {/* ページを変える */}
           <div className="flex justify-center gap-5">
 
-            <button onClick={() => setCurrentPage( currentPage - 1 )} className="px-1 py-1 rounded bg-[#7fffd4] text-black shadow font-bold-lg border-red">
+            <button 
+              onClick={() => setCurrentPage( currentPage - 1 )} 
+              disabled={currentPage === 1}
+              style={{
+                backgroundColor: currentPage === 1 ? '#d1d5db' : 'white',
+                cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
+              }}
+              className="px-1 py-1 rounded shadow font-bold-lg"
+            >
               {'<'}
             </button>
 
@@ -71,7 +79,7 @@ function Outline() {
               {currentPage}
             </div>
 
-            <button onClick={() => setCurrentPage( currentPage + 1 )} className="px-1 py-1 rounded bg-[#7fffd4] text-black shadow font-bold-lg border-red">
+            <button onClick={() => setCurrentPage( currentPage + 1 )} className="px-1 py-1 rounded text-black shadow font-bold-lg" style={{backgroundColor:"white"}}>
               {'>'}
             </button>
 
