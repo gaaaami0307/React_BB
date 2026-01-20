@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 
 function Outline() {
   const [threads, setThreads] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const offset = currentPage * 10;
+    const offset = (currentPage - 1) * 10;
     fetch(`https://railway.bulletinboard.techtrain.dev/threads?offset=${offset}`)
     .then(response => response.json())
     .then(data => {
@@ -59,6 +59,23 @@ function Outline() {
               </li>
             ))}
           </ul>
+
+          {/* ページを変える */}
+          <div className="flex justify-center gap-5">
+
+            <button onClick={() => setCurrentPage( currentPage - 1 )} className="px-1 py-1 rounded bg-[#7fffd4] text-black shadow font-bold-lg border-red">
+              {'<'}
+            </button>
+
+            <div className="px-3 py-1 rounded bg-white text-black shadow font-bold-lg border-black place-content-center">
+              {currentPage}
+            </div>
+
+            <button onClick={() => setCurrentPage( currentPage + 1 )} className="px-1 py-1 rounded bg-[#7fffd4] text-black shadow font-bold-lg border-red">
+              {'>'}
+            </button>
+
+          </div>
         </main>
       </div>
     </div>
