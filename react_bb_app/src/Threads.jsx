@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Layout from './Layout';
 
-function Outline() {
+function Threads() {
   const [threads, setThreads] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -55,4 +55,4 @@ function Outline() {
   )
 }
 
-export default Outline
+export default Threads
