@@ -1,55 +1,80 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Layout from './Layout';
 
 function Post() {
-  const [threads, setThreads] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [title, setTitle] = useState('');
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    const offset = (currentPage - 1) * 10;
-    fetch(`https://railway.bulletinboard.techtrain.dev/threads?offset=${offset}`)
-    .then(response => response.json())
-    .then(data => {
-      setThreads(data)
-      console.log(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    if (!title.trim()) {
+      setMessage('タイトルを入力してください');
+      return;
+    }
+
+    setMessage('');
+
+    fetch('https://railway.bulletinboard.techtrain.dev/threads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title }),
     })
-    .catch(error => console.error('Error:', error));
-  }, [currentPage]); // currentPageが変化したらデータ取得
+    .then(response => {
+      if (response.ok) {
+        setTitle('');
+        window.location.href = '/';
+      } else {
+        setMessage('エラーが発生しました');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      setMessage('エラーが発生しました');
+    })
+  };
 
   return (
     <Layout>
-      {/* スレッド一覧 */}
-      <ul className="space-y-2 mb-4">
-        {threads.map(thread => (
-          <li key={thread.id} className="bg-white p-3 rounded shadow">
-            {thread.title}
-          </li>
-        ))}
-      </ul>
+      <div className="max-w-xl mx-auto">
+        <h1 className="text-2xl font-bold mb-6">新しいスレッドを投稿</h1>
+        
+        <form onSubmit={handleSubmit} className="space-y-4">
+          
+          {/* スレッドタイトル */}
+          <div>
+            <label htmlFor="title" className="block mb-2 font-medium">
+              スレッドのタイトルを入力
+            </label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="タイトルを入力..."
+              className="w-full p-5 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7fffd4]"
+            />
+          </div>
 
-      {/* ページを変える */}
-      <div className="flex justify-center gap-5">
+          {/* 投稿ボタン */}
+          <button
+            type="submit"
+            style={{
+              backgroundColor: '#7fffd4'
+            }}
+            className="px-6 py-2 rounded shadow font-medium"
+          >
+            投稿する
+          </button>
 
-        <button 
-          onClick={() => setCurrentPage( currentPage - 1 )} 
-          disabled={currentPage === 1}
-          style={{
-            backgroundColor: currentPage === 1 ? '#d1d5db' : 'white',
-            cursor: currentPage === 1 ? 'not-allowed' : 'pointer'
-          }}
-          className="px-1 py-1 rounded shadow font-bold-lg"
-        >
-          {'<'}
-        </button>
-
-        <div className="px-3 py-1 rounded bg-white text-black shadow font-bold-lg border-black place-content-center">
-          {currentPage}
-        </div>
-
-        <button onClick={() => setCurrentPage( currentPage + 1 )} className="px-1 py-1 rounded text-black shadow font-bold-lg" style={{backgroundColor:"white"}}>
-          {'>'}
-        </button>
-
+          {message && (
+            <p className={"mt-2 text-red-500"}>
+              {message}
+            </p>
+          )}
+        </form>
       </div>
     </Layout>
   )
