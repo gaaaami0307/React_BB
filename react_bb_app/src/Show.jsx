@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
 import Layout from './Layout';
 
-function Threads() {
-  const [threads, setThreads] = useState([]);
+function Show() {
+  const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const params = new URLSearchParams(window.location.search);
+  const thread_id = params.get('id');
+  const thread_title = params.get('title');
+
+  console.log(thread_id);
 
   useEffect(() => {
     const offset = (currentPage - 1) * 10;
-    fetch(`https://railway.bulletinboard.techtrain.dev/threads?offset=${offset}`)
+    fetch(`https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=${offset}`)
     .then(response => response.json())
     .then(data => {
-      setThreads(data)
+      setPosts(data.posts || []);
       console.log(data);
     })
     .catch(error => console.error('Error:', error));
@@ -18,14 +24,16 @@ function Threads() {
 
   return (
     <Layout>
-      {/* スレッド一覧 */}
+      {/* スレッドタイトル */}
+      <h1 className="text-2xl font-bold mb-6 text-center">{"["}{thread_title}{"]"}</h1>
+
+      {/* コメント一覧 */}
       <ul className="space-y-2 mb-4">
-        {threads.map(thread => (
-          <a href={`/threads/show?id=${thread.id}&title=${thread.title}`}>
-            <li key={thread.id} className="bg-white hover:bg-[#e0e0e0] p-3 rounded shadow">
-              {thread.title}
+        {posts.map(post => (
+            <li key={post.id} className="p-3">
+              <p className="text-gray-500 text-sm">ID: {post.id}</p>
+              <p>{post.post}</p>
             </li>
-          </a>
         ))}
       </ul>
 
@@ -57,4 +65,4 @@ function Threads() {
   )
 }
 
-export default Threads
+export default Show
