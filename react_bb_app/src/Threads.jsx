@@ -21,7 +21,7 @@ function Threads() {
       {/* スレッド一覧 */}
       <ul className="space-y-2 mb-4">
         {threads.map(thread => (
-          <a href={`/threads/show?id=${thread.id}&title=${thread.title}`}>
+          <a href={`/threads/${thread.id}`}>
             <li key={thread.id} className="bg-white hover:bg-[#e0e0e0] p-3 rounded shadow">
               {thread.title}
             </li>

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import Layout from './Layout';
+import { useParams } from 'react-router-dom';
 
 function Show() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const params = new URLSearchParams(window.location.search);
-  const thread_id = params.get('id');
-  const thread_title = params.get('title');
+  const thread_id = useParams().id;
+  {/*const thread_title = new URLSearchParams(window.location.search).get('title');*/}
 
   console.log(thread_id);
 
@@ -60,7 +60,7 @@ function Show() {
   return (
     <Layout>
       {/* スレッドタイトル */}
-      <h1 className="text-2xl font-bold mb-6 text-center">{"["}{thread_title}{"]"}</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">{"スレッド詳細"}</h1>
 
       {/* コメント一覧 */}
       <ul className="space-y-2 mb-4">
